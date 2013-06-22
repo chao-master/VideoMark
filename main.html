@@ -1,0 +1,213 @@
+<head>
+<title>Video Mark</title>
+<style>
+    #videosContainer{
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        overflow-y:scroll;
+    }
+    #overcover{
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        background: rgba(0,0,0,.8);
+        display:none;
+    }
+    
+    #auth{
+        text-align:center;
+        position:absolute;
+        left:50%;
+        top:50%;
+        margin-top:-50px;
+        margin-left:-50px;
+        height:100px;
+        width:100px;
+    }
+    #auth>*{
+        display:none;
+    }
+    
+    .auth, .playing {
+        display:block !important;
+    }
+    
+    .auth #auth{
+        display:block;
+    }
+    .auth.checking #checking{
+        display:block;
+        color:white;
+    }
+    .auth.authorize #authorize{
+        display:block;
+    }
+    
+    .loadingCircle {
+        border: 1px solid white;
+        border-right: 0;
+        border-bottom: 0;
+        -webkit-border-radius: 100px;
+        height: 20px;
+        width: 20px;
+        margin: 0px -10px;
+        position: relative;
+        left:50%;
+        -webkit-transition: all 0.5s ease-in;
+        -webkit-animation-name: rotate; 
+        -webkit-animation-duration: 1.0s; 
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+    }
+    @-webkit-keyframes rotate {
+        from {-webkit-transform: rotate(0deg);}
+        to {-webkit-transform: rotate(360deg);}
+    }
+    
+    .video{
+        width:320px;
+        height:180px;
+        float:left;
+        margin:2px;
+        -webkit-transition: all 0.1s ease-in;
+    }
+    .video div{
+        display:none;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,.8);
+        color:white;
+        position:relative;
+    }
+    .video header{
+        position: absolute;
+        top: 0px;
+        padding: 5px;
+    }
+    .video footer{
+        position: absolute;
+        bottom: 0px;
+        padding: 5px;
+    }
+    .video:hover div{
+        display:block;
+    }
+    
+    .watched{
+        height:6em;
+    }
+    .watched div{
+        display:block;
+    }
+    
+    #loadBar{
+        text-align:center;
+        position:absolute;
+        top: 0px;
+        right: 15px;
+        height: 45px;
+        width: 100px;
+        border-bottom-left-radius: 20px;
+        background:rgba(0,0,0,.8);
+        color:white;
+        padding:5px
+    }
+    #loadBar>*{
+        display:none
+    }
+    .loading,.loading #loading,.loadMore,.loadMore #loadMore{
+        display:block !important;
+    }
+    #loadMore {
+        margin: 10px auto;
+    }
+    
+    .playing #player{
+        display:block;
+        position:absolute;
+        left:50%;
+        top:50%;
+        margin-left:-640px;
+        margin-top:-360px;
+        width:1280px;
+        height:720px;
+    }
+    
+    #playerWrapper {
+        top:0px;
+        bottom:0px;
+        left:0px;
+        right:0px;
+        position:absolute;
+    }
+    #comments, #info{
+        display:none;
+        position:absolute;
+        color:white;
+    }
+    
+    .playerInfo #playerWrapper {
+        right:300px;
+        bottom:200px;
+    }
+    .playerInfo #info{
+        display:block;
+        bottom:0px;
+        left:0px;
+        right:300px;
+        height:200px;
+    }
+    #title{
+        font-size:19px
+    }
+    
+    .playerInfo #comments{
+        display:block;
+        top:0px;
+        bottom:0px;
+        right:0px;
+        width:300px;
+    }
+    
+</style>
+<script type="text/javascript" src="jQuery.js"></script>
+<script type="text/javascript" src="script.js"></script>
+<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+</script>
+</head>
+<body>
+<div id="videosContainer">
+    <div id="videos"></div>
+</div>
+<div id="loadBar">
+    <div id="loading"><div class="loadingCircle"></div>Loading...</div>
+    <button id="loadMore">Load More</button>
+</div>
+<div id="overcover" class="auth checking playerInfo">
+    <div id="auth">
+        <button id="authorize">Link to Youtube</button>
+        <div id="checking">
+            <div class="loadingCircle"></div>
+            Linking
+        </div>
+    </div>
+    <div id="player">
+        <div id="playerWrapper">
+            <iframe id="playerFrame" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <ul id="comments"></ul>
+        <div id="info">
+            <div id="title"></div>
+            <div id="description"></div>
+            <div id="footer"></div>
+        </div>
+    </div>
+</div>
+
+
+</body>
